@@ -53,7 +53,7 @@ import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 const route = useRoute();
 const product = ref([]);
-let currentImage = ref(null);
+
 onBeforeMount(async () => {
   const res = await useFetch(`/api/prisma/get-product-by-id/${route.params.id}`)
   setTimeout(() => userStore.isLoading = false, 1000)
