@@ -51,7 +51,7 @@
             <NuxtLink
               v-else
               to="/address"
-              class="flex items-center text-blue-500 hover:text-red-400"
+              class="flex items-center text-blue-500 hover:text-[#f8d210]"
             >
               <Icon name="mdi:plus" size="18" class="mr-2" />
               Add New Address
@@ -99,7 +99,7 @@
               <button
                 :disabled="isProcessing"
                 type="submit"
-                class="mt-4 bg-gradient-to-r from-[#c55ffc] to-[#7954a1] w-full text-white text-[21px] font-semibold p-1.5 rounded-full"
+                class="mt-4 bg-[#f8d210] w-full text-white text-[21px] font-semibold p-1.5 rounded-full"
                 :class="isProcessing ? 'opacity-70' : 'opacity-100'"
               >
                 <Icon v-if="isProcessing" name="eos-icons:loading" />

@@ -5,7 +5,7 @@
             <img class="rounded-t" :src="product.url" />
             <div id="ProductDetails">
                 <span class="flex items-center justify-start gap-3 px-1 pt-1">
-                    <span class="text-[#c55ffc] font-semibold">${{ priceComputed }}</span>
+                    <span class="text-black font-semibold">${{ priceComputed }}</span>
                 </span>
                 <p class="px-1 pt-0.5 text-xs text-[#252525]">
                     {{ product.title.substring(0, 60) }}

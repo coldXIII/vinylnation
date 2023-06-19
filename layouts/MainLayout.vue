@@ -3,19 +3,19 @@
     <div id="TopMenu" class="w-full bg-[#FAFAFA] border-b md:block hidden">
       <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-[#FAFAFA] max-w-[1200px]">
         <NuxtLink to="/add">
-          <li class="border-r border-r-gray-400 px-3 hover:text-[#FF4646] cursor-pointer">
+          <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
             Add a product
           </li>
         </NuxtLink>
 
-        <li class="border-r border-r-gray-400 px-3 hover:text-[#FF4646] cursor-pointer">
+        <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
           <a href="https://www.youtube.com/@MyAnalogJournal/videos" target="_blank"> Listen</a>
         </li>
-        <li class="border-r border-r-gray-400 px-3 hover:text-[#FF4646] cursor-pointer">
+        <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
           Contact with Us
         </li>
         <li @mouseenter="isAccountMenu = true" @mouseleave="isAccountMenu = false"
-          class="relative flex items-center px-2.5 hover:text-[#FF4646] h-full cursor-pointer" :class="isAccountMenu
+          class="relative flex items-center px-2.5 hover:text-[#f8d210] h-full cursor-pointer" :class="isAccountMenu
             ? 'bg-white border z-40 shadow-xl'
             : 'border border-[#FAFAFA]'
             ">
@@ -30,7 +30,7 @@
             <div v-if="!user">
               <div class="flex items-center gap-1 px-3 mb-3">
                 <NuxtLink to="/auth"
-                  class="bg-[#FF4646] text-center w-full text-[16px] rounded-sm text-white font-semibold p-2">
+                  class="bg-[#f8d210] text-center w-full text-[16px] rounded-sm text-white font-semibold p-2">
                   Login / Register
                 </NuxtLink>
               </div>
@@ -40,7 +40,7 @@
               <li @click="navigateTo('/orders')" class="text-[13px] py-2 px-4 w-full hover:bg-gray-200">
                 My Orders
               </li>
-              <li v-if="user" class="text-[13px] py-2 px-4 w-full hover:bg-gray-200">
+              <li v-if="user" class="text-[13px] py-2 px-4 w-full hover:bg-red-300" @click="client.auth.signOut()">
                 Sign out
               </li>
             </ul>
@@ -57,11 +57,11 @@
 
         <div class="max-w-[700px] w-full md:block hidden">
           <div class="relative">
-            <div class="flex items-center border-2 border-[#7954a1] rounded-md w-full">
-              <input class="w-full placeholder-gray-400 text-sm pl-3 focus:outline-none" placeholder="your favourite band"
-                type="text" v-model="searchItem" />
+            <div class="flex items-center border-2 border-black rounded-md w-full">
+              <input class="w-full placeholder-gray-400 text-sm pl-3 focus:outline-none"
+                placeholder="Find Your Favourite Band" type="text" v-model="searchItem" />
               <Icon v-if="isSearching" name="eos-icons:loading" size="25" class="mr-2" />
-              <button class="flex items-center h-[100%] p-1.5 px-2 bg-[#7954a1]">
+              <button class="flex items-center h-[100%] p-1.5 px-2 bg-black">
                 <Icon name="ph:magnifying-glass" size="20" color="#ffffff" />
               </button>
             </div>
@@ -84,7 +84,7 @@
         <NuxtLink to="/cart" class="flex items-center">
           <button class="relative md:block hidden" @mouseenter="isCartHover = true" @mouseleave="isCartHover = false">
             <span
-              class="absolute flex items-center justify-center -right-[3px] top-0 bg-[#7954a1] h-[17px] min-w-[17px] text-xs text-white px-0.5 rounded-full">
+              class="absolute flex items-center justify-center -right-[3px] top-0 bg-[#f8d210] h-[17px] min-w-[17px] text-xs text-white px-0.5 rounded-full">
               {{ userStore.cart.length }}
             </span>
             <div class="min-w-[40px]">
@@ -102,13 +102,16 @@
 
   <Loading v-if="userStore.isLoading" />
 
-  <div class="lg:pt-[150px] md:pt-[130px] pt-[80px]" />
+  <div class="lg:pt-[10rem] md:pt-[8rem] pt-[6rem]" />
   <slot />
+
+  <Footer v-if="!userStore.isLoading" />
 </template>
 
 <script setup >
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore()
+const client = useSupabaseClient()
 
 const user = useSupabaseUser()
 

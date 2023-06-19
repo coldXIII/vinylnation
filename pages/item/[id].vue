@@ -15,11 +15,11 @@
           </div>
 
           <div class="flex items-center justify-start my-2">
-            <Icon name="ic:baseline-star" color="#7954a1" />
-            <Icon name="ic:baseline-star" color="#7954a1" />
-            <Icon name="ic:baseline-star" color="#7954a1" />
-            <Icon name="ic:baseline-star" color="#7954a1" />
-            <Icon name="ic:baseline-star" color="#7954a1" />
+            <Icon name="ic:baseline-star" color="#f8d210" />
+            <Icon name="ic:baseline-star" color="#f8d210" />
+            <Icon name="ic:baseline-star" color="#f8d210" />
+            <Icon name="ic:baseline-star" color="#f8d210" />
+            <Icon name="ic:baseline-star" color="#f8d210" />
           </div>
 
           <div class="border-b" />
