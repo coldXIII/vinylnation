@@ -69,6 +69,7 @@ const isInCart = computed(() => {
   });
   return res;
 });
+
 const priceComputed = computed(() => {
   if (product.value) {
     return product.value.price / 100;

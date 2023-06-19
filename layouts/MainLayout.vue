@@ -26,7 +26,7 @@
           <Icon name="mdi:chevron-down" size="15" class="ml-5" />
 
           <div id="AccountMenu" v-if="isAccountMenu"
-            class="absolute bg-white w-[220px] text-[#333333] z-40 top-[38px] -left-[100px] border-x border-b">
+            class="absolute bg-white w-[220px] text-[#333333] z-40 top-[2.5rem] -left-[100px] border-x border-b">
             <div v-if="!user">
               <div class="flex items-center gap-1 px-3 mb-3">
                 <NuxtLink to="/auth"
@@ -59,7 +59,7 @@
           <div class="relative">
             <div class="flex items-center border-2 border-black rounded-md w-full">
               <input class="w-full placeholder-gray-400 text-sm pl-3 focus:outline-none"
-                placeholder="Find Your Favourite Band" type="text" v-model="searchItem" />
+                placeholder="Find Your Favourite Vinyl" type="text" v-model="searchItem" />
               <Icon v-if="isSearching" name="eos-icons:loading" size="25" class="mr-2" />
               <button class="flex items-center h-[100%] p-1.5 px-2 bg-black">
                 <Icon name="ph:magnifying-glass" size="20" color="#ffffff" />
@@ -102,13 +102,13 @@
 
   <Loading v-if="userStore.isLoading" />
 
-  <div class="lg:pt-[10rem] md:pt-[8rem] pt-[6rem]" />
+  <div class="lg:pt-[6rem] md:pt-[4rem] pt-[2rem]" />
   <slot />
 
   <Footer v-if="!userStore.isLoading" />
 </template>
 
-<script setup >
+<script setup>
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore()
 const client = useSupabaseClient()

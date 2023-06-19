@@ -3,7 +3,7 @@
     <div id="AddressPage" class="mt-4 max-w-[500px] mx-auto px-2">
       <div class="mx-auto bg-white rounded-lg p-3">
         <div class="text-xl text-bold mb-2">Add a product</div>
-        <form @submit.prevent="submit()">
+        <form @submit.prevent="addProduct()">
           <TextInput class="w-full" placeholder="Title" v-model:input="title" inputType="text"
             :error="error && error.type == 'title' ? error.message : ''" />
 
@@ -43,13 +43,21 @@ const price = ref(null);
 const error = ref(null);
 const isWorking = ref(false);
 
+const styleClasses = {
+  outerClass: "mb-5",
+  labelClass: "block mb-1 font-bold text-sm",
+  innerClass: "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+  inputClass: "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+  helpClass: "text-xs text-gray-500"
+}
+
 onBeforeMount(() => {
   setTimeout(() => userStore.isLoading = false, 1000)
 })
 
 console.log(userStore.isLoading)
 
-const submit = async () => {
+const addProduct = async () => {
   isWorking.value = true;
   error.value = '';
   if (!title.value) {
