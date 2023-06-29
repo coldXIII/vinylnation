@@ -7,10 +7,7 @@
             <div class="text-xl font-semibold mb-2">Shipping Address</div>
 
             <div v-if="currentAddress">
-              <NuxtLink
-                to="/address"
-                class="flex items-center pb-2 text-blue-500 hover:text-red-400"
-              >
+              <NuxtLink to="/address" class="flex items-center pb-2 text-blue-500 hover:text-red-400">
                 <Icon name="mdi:plus" size="18" class="mr-2" />
                 Update Address
               </NuxtLink>
@@ -48,18 +45,14 @@
               </div>
             </div>
 
-            <NuxtLink
-              v-else
-              to="/address"
-              class="flex items-center text-blue-500 hover:text-[#f8d210]"
-            >
+            <NuxtLink v-else to="/address" class="flex items-center text-blue-500 hover:text-[#f8d210]">
               <Icon name="mdi:plus" size="18" class="mr-2" />
               Add New Address
             </NuxtLink>
           </div>
 
           <div id="Items" class="bg-white rounded-lg p-4 mt-4">
-            <div v-for="product in userStore.checkout">
+            <div v-for="product in userStore.checkout" :key="product.id">
               <CheckoutItem :product="product" />
             </div>
           </div>
@@ -85,23 +78,13 @@
             </div>
 
             <form @submit.prevent="pay()">
-              <div
-                class="border border-gray-500 p-2 rounded-sm"
-                id="card-element"
-              />
+              <div class="border border-gray-500 p-2 rounded-sm" id="card-element" />
 
-              <p
-                id="card-error"
-                role="alert"
-                class="text-red-700 text-center font-semibold"
-              />
+              <p id="card-error" role="alert" class="text-red-700 text-center font-semibold" />
 
-              <button
-                :disabled="isProcessing"
-                type="submit"
-                class="mt-4 bg-[#f8d210] w-full text-white text-[21px] font-semibold p-1.5 rounded-full"
-                :class="isProcessing ? 'opacity-70' : 'opacity-100'"
-              >
+              <button :disabled="isProcessing" type="submit"
+                class="flex items-center justify-center bg-[#f8d210] w-full text-black border border-black text-[21px] font-semibold p-1.5 rounded-lg mt-4"
+                :class="isProcessing ? 'opacity-70' : 'opacity-100'">
                 <Icon v-if="isProcessing" name="eos-icons:loading" />
                 <div v-else>Place order</div>
               </button>

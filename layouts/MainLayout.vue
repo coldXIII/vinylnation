@@ -1,7 +1,7 @@
 <template>
   <div id="MainLayout" class="w-full fixed z-50">
-    <div id="TopMenu" class="w-full bg-[#FAFAFA] border-b md:block hidden">
-      <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-[#FAFAFA] max-w-[1200px]">
+    <div id="TopMenu" class="w-full bg-[#fafafa] border-b md:block hidden">
+      <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-[#fafafa]  max-w-[1200px]">
         <NuxtLink to="/add">
           <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
             Add a product
@@ -11,13 +11,10 @@
         <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
           <a href="https://www.youtube.com/@MyAnalogJournal/videos" target="_blank"> Listen</a>
         </li>
-        <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
-          Contact with Us
-        </li>
         <li @mouseenter="isAccountMenu = true" @mouseleave="isAccountMenu = false"
           class="relative flex items-center px-2.5 hover:text-[#f8d210] h-full cursor-pointer" :class="isAccountMenu
             ? 'bg-white border z-40 shadow-xl'
-            : 'border border-[#FAFAFA]'
+            : 'border border-[#fafafa]'
             ">
           <Icon v-if="!user" name="ph:user-thin" size="17" />
           <img v-else :src="user.user_metadata.avatar_url" class="w-8 h-8 rounded-full" alt="">
@@ -67,14 +64,14 @@
             </div>
 
             <div class="absolute bg-white max-w-[700px] h-auto w-full">
-              <div v-if="items && items" v-for="item in items" class="p-1">
-                <NuxtLink :to="`/item/${item.id}`"
+              <div v-if="items" class="p-1">
+                <NuxtLink :to="`/item/${item.id}`" v-for="item in items" :key="item.id"
                   class="flex items-center justify-between w-full cursor-pointer hover:bg-gray-100">
                   <div class="flex items-center">
                     <img class="rounded-md" width="40" :src="item.url" />
                     <div class="truncate ml-2">{{ item.title }}</div>
                   </div>
-                  <div class="truncate">${{ item.price }}</div>
+                  <div class="truncate">${{ item.price / 100 }}</div>
                 </NuxtLink>
               </div>
             </div>
@@ -127,6 +124,7 @@ const searchByName = useDebounce(async () => {
   items.value = res.data.value
   isSearching.value = false
 }, 100)
+
 
 watch(() => searchItem.value, async () => {
   if (!searchItem.value) {

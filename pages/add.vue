@@ -20,7 +20,7 @@
             :error="error && error.type == 'description' ? error.message : ''" />
 
           <button :disabled="isWorking" type="submit"
-            class="mt-6 bg-gradient-to-r from-[#c55ffc] to-[#7954a1] w-full text-white text-[21px] font-semibold p-1.5 rounded-full">
+            class="mt-6 bg-[#f8d210] w-full text-black text-[21px] border border-black font-semibold p-1.5 rounded-lg">
             <div v-if="!isWorking">Add an Item</div>
             <Icon v-else name="eos-icons:loading" size="25" class="mr-2" />
           </button>

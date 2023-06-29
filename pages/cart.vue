@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div id="ShoppingCartPage" class="mt-4 max-w-[1200px] mx-auto p-2">
+    <div id="ShoppingCartPage" class="mt-4 max-w-[1200px] mx-auto p-2 min-h-[75vh] mt-[5vh]">
       <div
         v-if="!userStore.cart.length"
         class="h-[500px] flex items-center justify-center"
@@ -8,7 +8,7 @@
         <div class="pt-10">
           <img class="mx-auto" width="250" src="/cart-empty.png" />
 
-          <div class="text-xl text-center mt-4">No items yet?</div>
+          <div class="text-xl text-center mt-4">No items yet</div>
 
           <div v-if="!user" class="flex text-center">
             <NuxtLink
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div id="Items" class="bg-white rounded-lg p-4 mt-4">
-            <div v-for="product in userStore.cart">
+            <div v-for="product in userStore.cart" :key="product.id">
               <CartItem
                 :product="product"
                 :selectedArray="selectedArray"
@@ -50,7 +50,7 @@
             </div>
             <button
               @click="goToCheckout"
-              class="flex items-center justify-center bg-[#f8d210] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+              class="flex items-center justify-center bg-[#f8d210] w-full text-black border border-black text-[21px] font-semibold p-1.5 rounded-lg mt-4"
             >
               Checkout
             </button>
@@ -58,7 +58,7 @@
           <div id="PaymentProtection" class="bg-white rounded-lg p-4 mt-4">
             <div class="text-lg font-semibold mb-2">Payment methods</div>
             <div class="flex items-center justify-start gap-8 my-4">
-              <div v-for="card in cards">
+              <div v-for="(card,index) in cards" :key="index">
                 <img class="h-6" :src="card" />
               </div>
             </div>
