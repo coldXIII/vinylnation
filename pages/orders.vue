@@ -14,14 +14,14 @@
 
                         <div v-for="item in order.orderItem">
                             <NuxtLink class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
-                                :to="`/item/${item.productId}`">
-                                <img width="40" :src="item.product.url">
-                                {{ item.product.title }}
+                                :to="`/item/${item.id}`">
+                                <img width="40" :src="item.url">
+                                {{ item.title }}
                             </NuxtLink>
                         </div>
 
                         <div class="pt-2 pb-5">
-                            Delivery Address: {{ order.name }}, {{ order.address }}, {{ order.zipcode }}, {{ order.city }},
+                            Delivery Address: {{ order.name }}, {{ order.address }}, {{ order.zipCode }}, {{ order.city }},
                             {{ order.country }}
                         </div>
                     </div>
@@ -35,17 +35,21 @@
     </MainLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import MainLayout from '~/layouts/MainLayout.vue';
+import { IOrder } from '~/types'
 import { useUserStore } from '~/stores/user';
+
 const userStore = useUserStore()
 const user = useSupabaseUser()
 
-const orders = ref(null)
+const orders = ref<IOrder[] | null>(null)
 
 onBeforeMount(async () => {
-    const res = await useFetch(`/api/prisma/get-all-orders-by-user/${user.value.id}`)
-    orders.value = res.data.value
+    if (user.value) {
+        const res = await useFetch<IOrder[]>(`/api/prisma/get-all-orders-by-user/${user.value.id}`)
+        orders.value = res.data.value
+    }
 })
 
 onMounted(() => {

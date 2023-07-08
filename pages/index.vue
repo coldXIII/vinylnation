@@ -8,22 +8,23 @@
                 </div>
             </div>
             <Proposal />
-            <MAJ/>
+            <MAJ />
         </div>
     </MainLayout>
 </template>
 
-<script setup >
+<script setup lang="ts">
 import MainLayout from "~/layouts/MainLayout.vue"
+import { IProduct } from "~/types";
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore()
 
-const products = ref([])
+const products = ref<IProduct[] | null>(null)
 
 onBeforeMount(async () => {
-    const res = await useFetch('/api/prisma/get-all-products')
-    setTimeout(() => products.value = res.data.value, 1000)
-    setTimeout(() => userStore.isLoading = false, 1000)
+    const res = await useFetch<IProduct[]>('/api/prisma/get-all-products')
+    products.value = res.data.value
+    setTimeout(() => userStore.isLoading = false, 2000)
 })
 
 </script>

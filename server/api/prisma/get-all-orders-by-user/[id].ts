@@ -10,8 +10,7 @@ export default defineEventHandler(async (event) => {
                 include: {
                     product: true
                 }
-            }
-            
+            }     
         }
     })
     return orders

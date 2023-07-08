@@ -3,7 +3,7 @@
     <div id="ItemPage" class=" max-w-[1200px] mx-auto p-2  p-2 mb-8">
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[40%]">
-          <img v-if="product.url" class="rounded-lg object-fit" :src="product.url" />
+          <img v-if="product?.url" class="rounded-lg object-fit" :src="product?.url" />
         </div>
         <div class="md:w-[60%] bg-white p-3 rounded-lg">
           <div v-if="product">
@@ -47,23 +47,24 @@
   </MainLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import MainLayout from '~/layouts/MainLayout.vue';
+import { IProduct } from '~/types';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 const route = useRoute();
-const product = ref([]);
+const product = ref<IProduct | null>(null);
 
 onBeforeMount(async () => {
-  const res = await useFetch(`/api/prisma/get-product-by-id/${route.params.id}`)
+  const res = await useFetch<IProduct>(`/api/prisma/get-product-by-id/${route.params.id}`)
   setTimeout(() => userStore.isLoading = false, 1000)
   product.value = res.data.value
 })
 
 const isInCart = computed(() => {
   let res = false;
-  userStore.cart.forEach((prod) => {
-    if (route.params.id == prod.id) {
+  userStore.cart.forEach((prod: IProduct) => {
+    if (route.params.id === prod?.id.toString()) {
       res = true;
     }
   });
@@ -78,6 +79,8 @@ const priceComputed = computed(() => {
 });
 
 const addToCart = () => {
-  userStore.cart.push(product.value);
+  if (product.value) {
+    userStore.cart.push(product.value);
+  }
 };
 </script>

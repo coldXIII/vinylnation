@@ -44,11 +44,14 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { IProduct } from '~/types'
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 
-const props = defineProps(['product']);
+const props = defineProps<{
+    product: IProduct
+}>()
 
 const { product } = toRefs(props);
 

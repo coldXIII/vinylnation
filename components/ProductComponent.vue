@@ -15,8 +15,12 @@
     </div>
 </template>
 
-<script setup>
-const props = defineProps(['product']);
+<script setup lang="ts">
+import { IProduct } from '~/types'
+
+const props = defineProps<{
+    product: IProduct
+}>()
 
 const { product } = toRefs(props);
 

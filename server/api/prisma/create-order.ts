@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { IProduct } from '~/types';
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event) => {
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
     },
   });
 
-  body.products.forEach(async (product) => {
+  body.products.forEach(async (product:IProduct) => {
     await prisma.orderItem.create({
       data: {
         orderId: order.id,

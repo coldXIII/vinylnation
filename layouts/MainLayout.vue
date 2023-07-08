@@ -1,6 +1,6 @@
 <template>
-  <div id="MainLayout" class="w-full fixed z-50">
-    <div id="TopMenu" class="w-full bg-[#fafafa] border-b md:block hidden">
+  <div class="w-full fixed z-50">
+    <div class="w-full bg-[#fafafa] border-b md:block hidden">
       <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-[#fafafa]  max-w-[1200px]">
         <NuxtLink to="/add">
           <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
@@ -22,7 +22,7 @@
 
           <Icon name="mdi:chevron-down" size="15" class="ml-5" />
 
-          <div id="AccountMenu" v-if="isAccountMenu"
+          <div v-if="isAccountMenu"
             class="absolute bg-white w-[220px] text-[#333333] z-40 top-[2.5rem] -left-[100px] border-x border-b">
             <div v-if="!user">
               <div class="flex items-center gap-1 px-3 mb-3">
@@ -46,7 +46,7 @@
       </ul>
     </div>
 
-    <div id="MainHeader" class="flex items-center w-full bg-white">
+    <div class="flex items-center w-full bg-white">
       <div class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto">
         <NuxtLink to="/" class="min-w-[170px]">
           <img width="170" src="/logo.png" />
@@ -85,7 +85,7 @@
               {{ userStore.cart.length }}
             </span>
             <div class="min-w-[40px]">
-              <Icon name="ph:shopping-cart-simple-light" size="33" :color="isCartHover ? '#7954a1' : ''" />
+              <Icon name="ph:shopping-cart-simple-light" size="33" :color="isCartHover ? '#f8d210' : ''" />
             </div>
           </button>
         </NuxtLink>
@@ -105,7 +105,8 @@
   <Footer v-if="!userStore.isLoading" />
 </template>
 
-<script setup>
+<script setup lang="ts">
+import  { IProduct } from '~/types'
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore()
 const client = useSupabaseClient()
@@ -116,11 +117,11 @@ const isAccountMenu = ref(false)
 const isCartHover = ref(false)
 const isSearching = ref(false)
 const searchItem = ref('')
-const items = ref(null)
+const items = ref<IProduct[] | null>(null)
 
 const searchByName = useDebounce(async () => {
   isSearching.value = true
-  const res = await useFetch(`/api/prisma/search-by-name/${searchItem.value}`)
+  const res = await useFetch<IProduct[]>(`/api/prisma/search-by-name/${searchItem.value}`)
   items.value = res.data.value
   isSearching.value = false
 }, 100)
@@ -129,7 +130,7 @@ const searchByName = useDebounce(async () => {
 watch(() => searchItem.value, async () => {
   if (!searchItem.value) {
     setTimeout(() => {
-      items.value = ''
+      items.value = null
       isSearching.value = false
       return
     }, 500)
@@ -137,5 +138,3 @@ watch(() => searchItem.value, async () => {
   searchByName()
 })
 </script>
-
-<style scoped></style>
