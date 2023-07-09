@@ -2,7 +2,7 @@
   <MainLayout>
     <div id="AddressPage" class="mt-4 max-w-[500px] mx-auto px-2">
       <div class="mx-auto bg-white rounded-lg p-3">
-        <div class="text-xl text-bold mb-2">Add a product</div>
+        <div class="text-xl text-bold mb-2">Add a Vinyl</div>
         <form @submit.prevent="addProduct()">
           <TextInput class="w-full" placeholder="Title" v-model:input="form.title" inputType="text"
             :error="error && error.type == 'title' ? error.message : ''" />
@@ -19,9 +19,9 @@
           <TextArea class="w-full mt-2" placeholder="Description" v-model:input="form.description" inputType="text"
             :error="error && error.type == 'description' ? error.message : ''" />
 
-          <button :disabled="isWorking" type="submit"
+          <button :disabled="isSubmitting" type="submit"
             class="mt-6 bg-[#f8d210] w-full text-black text-[21px] border hover:border-black font-semibold p-1.5 rounded-lg">
-            <div v-if="!isWorking">Add a Vinyl</div>
+            <div v-if="!isSubmitting">Add a Vinyl</div>
             <Icon v-else name="eos-icons:loading" size="25" class="mr-2" />
           </button>
         </form>
@@ -37,7 +37,7 @@ import { useUserStore } from '~/stores/user';
 
 const userStore = useUserStore();
 const error = ref<IError | null>(null);
-const isWorking = ref(false);
+const isSubmitting = ref(false);
 
 const form = reactive({
   title: '',
@@ -52,7 +52,7 @@ onBeforeMount(() => {
 })
 
 const addProduct = async () => {
-  isWorking.value = true;
+  isSubmitting.value = true;
   error.value = null;
   if (!form.title) {
     error.value = {
@@ -81,7 +81,7 @@ const addProduct = async () => {
     };
   }
   if (error.value) {
-    isWorking.value = false;
+    isSubmitting.value = false;
     return;
   }
 
@@ -95,7 +95,7 @@ const addProduct = async () => {
       price: Number(form.price) * 100,
     },
   });
-  isWorking.value = false;
+  isSubmitting.value = false;
   return navigateTo('/');
 };
 </script>

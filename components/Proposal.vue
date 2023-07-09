@@ -14,7 +14,7 @@
                 Recorded music revenue in the US grew for the seventh consecutive year and reached a record high of $15.9bn.
             </p>
             <NuxtLink to="/add">
-                <button class="border border-black px-6 py-2 bg-[#f8d210] rounded-lg ">
+                <button class="border border-black px-6 py-2 hover:bg-[#f8d210]  rounded-lg transition-all ">
                     Have a vinyl to sell?
                 </button>
             </NuxtLink>

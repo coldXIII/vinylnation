@@ -1,15 +1,14 @@
 <template>
   <div class="w-full fixed z-50">
     <div class="w-full bg-[#fafafa] border-b md:block hidden">
-      <ul class="flex items-center justify-end text-xs text-[#333333] font-light px-2 h-10 bg-[#fafafa]  max-w-[1200px]">
+      <ul class="flex items-center justify-end text-sm text-[#333333] font-light px-2 h-10 bg-[#fafafa]  max-w-[1200px]">
         <NuxtLink to="/add">
           <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
-            Add a product
+            Add a Vinyl
           </li>
         </NuxtLink>
-
         <li class="border-r border-r-gray-400 px-3 hover:text-[#f8d210] cursor-pointer">
-          <a href="https://www.youtube.com/@MyAnalogJournal/videos" target="_blank"> Listen</a>
+          <a href="https://www.youtube.com/@MyAnalogJournal/videos" target="_blank"> Listen to the vinyl music</a>
         </li>
         <li @mouseenter="isAccountMenu = true" @mouseleave="isAccountMenu = false"
           class="relative flex items-center px-2.5 hover:text-[#f8d210] h-full cursor-pointer" :class="isAccountMenu
@@ -23,9 +22,9 @@
           <Icon name="mdi:chevron-down" size="15" class="ml-5" />
 
           <div v-if="isAccountMenu"
-            class="absolute bg-white w-[220px] text-[#333333] z-40 top-[2.5rem] -left-[100px] border-x border-b">
+            class="absolute bg-white w-[220px] text-[#333333] z-40 top-[2.5rem] -left-[1rem] border-x border-b">
             <div v-if="!user">
-              <div class="flex items-center gap-1 px-3 mb-3">
+              <div class="flex items-center gap-1 px-3 py-4 mb-3">
                 <NuxtLink to="/auth"
                   class="bg-[#f8d210] text-center w-full text-[16px] rounded-sm text-white font-semibold p-2">
                   Login / Register
@@ -34,7 +33,7 @@
             </div>
             <div class="border-b" />
             <ul class="bg-white">
-              <li @click="navigateTo('/orders')" class="text-[13px] py-2 px-4 w-full hover:bg-gray-200">
+              <li @click="navigateTo('/orders')" class="text-[13px]  p-4 w-full hover:bg-gray-200">
                 My Orders
               </li>
               <li v-if="user" class="text-[13px] py-2 px-4 w-full hover:bg-red-300" @click="client.auth.signOut()">
@@ -48,7 +47,7 @@
 
     <div class="flex items-center w-full bg-white">
       <div class="flex lg:justify-start justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto">
-        <NuxtLink to="/" class="min-w-[170px]">
+        <NuxtLink to="/main" class="min-w-[170px]">
           <img width="170" src="/logo.png" />
         </NuxtLink>
 

@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div id="ItemPage" class=" max-w-[1200px] mx-auto p-2  p-2 mb-8">
+    <div class="max-w-[1200px] mx-auto p-2 pt-12 mb-8">
       <div class="md:flex gap-4 justify-between mx-auto w-full">
         <div class="md:w-[40%]">
           <img v-if="product?.url" class="rounded-lg object-fit" :src="product?.url" />
@@ -9,17 +9,9 @@
           <div v-if="product">
             <p class="mb-2">{{ product.title }}</p>
             <p class="mb-2 text-[#c55ffc]"><span class="text-black">Genre: </span>{{ product.genre }}</p>
-            <p class="font-light text-[13px] mb-2">
+            <p class="font-light text-[1rem] mb-2 overflow-y-scroll h-[40vh] max-h-[40vh] ">
               {{ product.description }}
             </p>
-          </div>
-
-          <div class="flex items-center justify-start my-2">
-            <Icon name="ic:baseline-star" color="#f8d210" />
-            <Icon name="ic:baseline-star" color="#f8d210" />
-            <Icon name="ic:baseline-star" color="#f8d210" />
-            <Icon name="ic:baseline-star" color="#f8d210" />
-            <Icon name="ic:baseline-star" color="#f8d210" />
           </div>
 
           <div class="border-b" />

@@ -101,15 +101,17 @@ import Stripe from 'stripe'
 import MainLayout from '~/layouts/MainLayout.vue';
 import { IAddress } from '~/types'
 import { useUserStore } from '~/stores/user';
+
 const userStore = useUserStore();
 const user = useSupabaseUser();
 const route = useRoute();
+
 definePageMeta({ middleware: 'auth' });
+
 let stripe: any = null;
 let clientSecret: string | null = '';
 let elements = null;
 let card: any = null;
-const form = null;
 const total = ref(0);
 
 const currentAddress = ref<IAddress | null>(null);

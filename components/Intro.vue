@@ -1,5 +1,5 @@
 <template>
-    <div class=" w-full mx-auto xl:flex my-[1rem]">
+    <div class=" w-full mx-auto xl:flex mt-[0.5rem] mb-[2rem]">
         <div class="flex-1">
             <img src="/atta.png" class="object-cover w-full h-full" alt="Sigur Ros - Atta" />
         </div>

@@ -71,7 +71,7 @@ onMounted(() => {
   setTimeout(() => (userStore.isLoading = false), 200);
 });
 
-const cards = ref(['visa.png', 'mastercard.png', 'paypal.png', 'applepay.png']);
+const cards = ref(['cards/visa.png', 'cards/mastercard.png', 'cards/paypal.png', 'cards/applepay.png']);
 
 const totalPriceComputed = computed(() => {
   let price = 0;
